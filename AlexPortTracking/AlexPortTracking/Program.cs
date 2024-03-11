@@ -1,4 +1,13 @@
+using AlexPortTracking.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add DbContext
+builder.Services.AddDbContext<AlexPortTrackingDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"))
+    );
+
 
 // Add services to the container.
 
@@ -8,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
