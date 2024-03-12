@@ -1,4 +1,7 @@
 using AlexPortTracking.Data;
+using AlexPortTracking.Repos.Car;
+using AlexPortTracking.Repos.Reader;
+using AlexPortTracking.Repos.ReaderType;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +13,12 @@ builder.Services.AddDbContext<AlexPortTrackingDbContext>(options =>
 
 
 // Add services to the container.
+builder.Services.AddTransient<IReaderTypeRepo, ReaderTypeRepo>();
+builder.Services.AddTransient<ICarRepo, CarRepo>();
+builder.Services.AddTransient<IReaderRepo, ReaderRepo>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opt =>
+                                       opt.JsonSerializerOptions.PropertyNamingPolicy = null);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -31,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(a => a.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
