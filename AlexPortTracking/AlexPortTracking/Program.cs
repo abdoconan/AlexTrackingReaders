@@ -2,6 +2,7 @@ using AlexPortTracking.Data;
 using AlexPortTracking.Repos.Car;
 using AlexPortTracking.Repos.Reader;
 using AlexPortTracking.Repos.ReaderType;
+using AlexPortTracking.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AlexPortTrackingDbContext>(options =>
 builder.Services.AddTransient<IReaderTypeRepo, ReaderTypeRepo>();
 builder.Services.AddTransient<ICarRepo, CarRepo>();
 builder.Services.AddTransient<IReaderRepo, ReaderRepo>();
+builder.Services.AddHostedService<StartReader>();
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
                                        opt.JsonSerializerOptions.PropertyNamingPolicy = null);

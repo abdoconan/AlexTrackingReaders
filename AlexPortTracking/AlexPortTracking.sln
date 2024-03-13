@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexPortTracking", "AlexPortTracking\AlexPortTracking.csproj", "{249C755A-BAD2-4A51-BD02-29F7B45E7962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexPortTracking", "AlexPortTracking\AlexPortTracking.csproj", "{249C755A-BAD2-4A51-BD02-29F7B45E7962}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketHandler", "SocketHandler\SocketHandler.csproj", "{FCF8A271-E323-4DB0-A699-D2E5DFC3140F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{249C755A-BAD2-4A51-BD02-29F7B45E7962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{249C755A-BAD2-4A51-BD02-29F7B45E7962}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{249C755A-BAD2-4A51-BD02-29F7B45E7962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF8A271-E323-4DB0-A699-D2E5DFC3140F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF8A271-E323-4DB0-A699-D2E5DFC3140F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF8A271-E323-4DB0-A699-D2E5DFC3140F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF8A271-E323-4DB0-A699-D2E5DFC3140F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
