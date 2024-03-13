@@ -24,7 +24,7 @@ namespace AlexPortTracking.Controllers
             => Ok(await carRepo.GetById(Id));
 
         [HttpPost]
-        public async Task<IActionResult> Create(CarDTO newCar)
+        public async Task<IActionResult> Create([FromBody] CarDTO newCar)
             => Created("", await carRepo.Create(newCar));
 
         [HttpPut("{Id}")]

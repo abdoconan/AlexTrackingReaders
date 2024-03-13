@@ -13,17 +13,44 @@ namespace AlexPortTracking.Services
     {
         public AlexPortTrackingDbContext context { get; set; }
         private readonly IServiceProvider serviceProvider;
+        private readonly IConfiguration config;
 
         public List<SocketsWithReaders> sockets { get; set; }
         List<IGrouping<int, Reader>> portsToOpen { get; set; }
-        public StartReader(IServiceProvider serviceProvider)
+        public StartReader(IServiceProvider serviceProvider, IConfiguration config)
         {
             this.serviceProvider = serviceProvider;
+            this.config = config;
         }
 
 
         public async Task<List<Reader>> GetAllReaders() =>
             await context.Readers.ToListAsync();
+
+        public async Task<bool> HandleCar(Car car, Reader reader, string tag)
+        {
+            var lastTranscationRow = await context.Transactions.OrderBy(t => t.LogTime).LastOrDefaultAsync(c => c.CarId == car.Id);
+            if ((lastTranscationRow == null) 
+                || (lastTranscationRow.ReaderId != reader.Id)
+                || ((DateTime.UtcNow - lastTranscationRow.LogTime).TotalMinutes > int.Parse(config["NewRowMinutes"])))
+            {
+                await context.Transactions.AddAsync(new Transaction
+                {
+                    Tag = tag,
+                    ReaderId = reader.Id,
+                    CarId = car.Id,
+                    Count = 0,
+                    LogTime = DateTime.UtcNow,
+                    LastLogTime = DateTime.UtcNow,
+                });
+                return true;
+            }
+
+            lastTranscationRow.LastLogTime = DateTime.UtcNow;
+            lastTranscationRow.Count++;
+
+            return true;
+        }
 
         public async Task<bool> GetReaderOperation(string tag, SocketHandler.SocketHandler socket)
         {
@@ -42,7 +69,11 @@ namespace AlexPortTracking.Services
                     ReaderId = reader.Id,
                     CarId = car?.Id,
                     Tag = tag,
+                    LogTime = DateTime.UtcNow,
                 });
+
+                if(car != null) 
+                    await HandleCar(car, reader, carTag);
                 await context.SaveChangesAsync();
 
 

@@ -24,7 +24,7 @@ namespace AlexPortTracking.Controllers
             => Ok(await readerRepo.GetById(Id));
 
         [HttpPost]
-        public async Task<IActionResult> Create(ReaderDTO newReader)
+        public async Task<IActionResult> Create([FromBody] ReaderDTO newReader)
             => Created("", await readerRepo.Create(newReader));
 
         [HttpPut("{Id}")]
