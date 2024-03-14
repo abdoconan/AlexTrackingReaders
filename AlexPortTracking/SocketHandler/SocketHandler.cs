@@ -22,37 +22,44 @@ namespace SocketHandler
             // Start listening for incoming connection requests
 
 
-            IPAddress ipAddress = IPAddress.Any;
-
-            // Create a TCP listener
-            TcpListener listener = new TcpListener(ipAddress, (int)port);
-
-            listener.Start();
-            Console.WriteLine($"Server is listening on {ipAddress}:{port}");
-            try
+            new Thread( async() => 
             {
-                while (true)
+                IPAddress ipAddress = IPAddress.Any;
+
+                // Create a TCP listener
+                TcpListener listener = new TcpListener(ipAddress, (int)port);
+
+                listener.Start();
+                Console.WriteLine($"Server is listening on {ipAddress}:{port}");
+                try
                 {
+                    while (true)
+                    {
 
-                    // Accept the pending client connection
-                    TcpClient client = await listener.AcceptTcpClientAsync();
+                        // Accept the pending client connection
+                        TcpClient client = await listener.AcceptTcpClientAsync();
 
-                    Console.WriteLine($"Client connected on port {this.port}");
+                        Console.WriteLine($"Client connected on port {this.port}");
 
-                    // Handle client communication asynchronously
-                    _ = HandleClientAsync(client);
+                        // Handle client communication asynchronously
+                        _ = HandleClientAsync(client);
 
+                        Thread.Sleep(10);
+
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-            finally
-            {
-                // Stop listening for new clients
-                listener.Stop();
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+                finally
+                {
+                    // Stop listening for new clients
+                    listener.Stop();
+                }
+            } ).Start();
+
+          
 
 
         }
@@ -70,6 +77,7 @@ namespace SocketHandler
 
                 while (true)
                 {
+                    buffer = new byte[1024]; 
                     // Read data from the client
                     int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 

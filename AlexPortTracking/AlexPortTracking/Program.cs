@@ -1,7 +1,9 @@
 using AlexPortTracking.Data;
+using AlexPortTracking.Middlewares;
 using AlexPortTracking.Repos.Car;
 using AlexPortTracking.Repos.Reader;
 using AlexPortTracking.Repos.ReaderType;
+using AlexPortTracking.Repos.Transaction;
 using AlexPortTracking.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,7 @@ builder.Services.AddDbContext<AlexPortTrackingDbContext>(options =>
 builder.Services.AddTransient<IReaderTypeRepo, ReaderTypeRepo>();
 builder.Services.AddTransient<ICarRepo, CarRepo>();
 builder.Services.AddTransient<IReaderRepo, ReaderRepo>();
+builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
 builder.Services.AddHostedService<StartReader>();
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
@@ -40,6 +43,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<GeneralErrorMiddleware>();
 
 app.UseCors(a => a.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

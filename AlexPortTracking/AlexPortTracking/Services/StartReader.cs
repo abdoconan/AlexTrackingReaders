@@ -61,7 +61,7 @@ namespace AlexPortTracking.Services
                 // 1001,800341002C,0E,3000,4E201909,36FA4,000000000,01,1001
 
 
-                tag = tag.Substring(reader.Signature.Length, tag.Length - reader.Signature.Length);
+                tag = tag.Substring(reader.Signature.Length, tag.Length - (2 * reader.Signature.Length));
                 var carTag = tag.Substring(24, 5);
 
                 var car = await context.Cars.FirstOrDefaultAsync(c => c.FrontTag == carTag || c.RearTag == carTag);

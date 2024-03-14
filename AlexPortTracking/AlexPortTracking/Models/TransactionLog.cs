@@ -29,7 +29,7 @@ namespace AlexPortTracking.Models
                 .WithMany(c => c.TransactionLogs)
                 .HasForeignKey(tl => tl.CarId);
 
-            builder.Property(tl => tl.Tag).HasMaxLength(128);
+            builder.Property(tl => tl.Tag).HasMaxLength(1024);
             builder.Property(tl => tl.LogTime).HasDefaultValue(DateTime.Now);
         }
     }
