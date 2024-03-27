@@ -19,12 +19,17 @@ namespace AlexPortTracking.Repos.Transaction
             if (LatestedId != null)
                 return (await context.Transactions.Include(t => t.Car).Where(t => t.Id > LatestedId && t.ReaderId == readerId).ToListAsync()).Adapt<List<TransactionDTO>>();
 
-            return (new List<AlexPortTracking.Models.Transaction> {await context.Transactions.Include(t => t.Car)
-                .Where(t => t.ReaderId  == readerId)
+            var lastObject = await context.Transactions.Include(t => t.Car)
+                .Where(t => t.ReaderId == readerId)
                 .OrderByDescending(t => t.Id)
-                .FirstOrDefaultAsync()
+                .FirstOrDefaultAsync();
+            if (lastObject != null)
+                return (new List<AlexPortTracking.Models.Transaction> {
+                    lastObject
                     })
                 .Adapt<List<TransactionDTO>>();
+
+            return new List<TransactionDTO>();
         }
     }
 }
