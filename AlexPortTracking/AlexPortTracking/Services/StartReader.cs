@@ -51,7 +51,6 @@ namespace AlexPortTracking.Services
 
             return true;
         }
-
         public async Task<bool> GetReaderOperation(string tag, SocketHandler.SocketHandler socket)
         {
             try

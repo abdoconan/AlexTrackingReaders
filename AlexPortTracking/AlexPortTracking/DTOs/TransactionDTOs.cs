@@ -8,4 +8,7 @@
         DateTime LogTime,
         DateTime LastLogTime, 
         CarDTO Car);
+
+
+    public record TransactionLogDTO(int Id, string Tag);
 }

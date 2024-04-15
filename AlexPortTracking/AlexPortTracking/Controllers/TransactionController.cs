@@ -18,5 +18,10 @@ namespace AlexPortTracking.Controllers
         [HttpGet("{readerId}")]
         public async Task<IActionResult> GetTransaction([FromRoute] int readerId, [FromQuery] int? LastedTransaction) =>
             Ok(await transactionRepo.GetLatestTransaction(readerId, LastedTransaction));
+
+        [HttpGet("log/{readerId}")]
+        public async Task<IActionResult> GetTransactionLog([FromRoute] int readerId, [FromQuery] int? LastedTransaction) =>
+            Ok(await transactionRepo.GetLatestTagRead(readerId, LastedTransaction));
+
     }
 }
