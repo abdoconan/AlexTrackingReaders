@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace AlexPortTracking.DTOs
 {
@@ -31,8 +32,10 @@ namespace AlexPortTracking.DTOs
         DateTime LicenceExpiryDate,
         int? CarClassId,
         int? CarTypeId,
-        int? GovernorateId
-
+        int? GovernorateId,
+        CarClassDTOs CarClass, 
+        CarTypeDTO CarType,
+        GovernorateDTO Governorate
         ) 
             : 
         CarDTO(Id

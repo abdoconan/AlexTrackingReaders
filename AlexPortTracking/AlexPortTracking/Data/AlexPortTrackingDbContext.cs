@@ -23,5 +23,8 @@ namespace AlexPortTracking.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionLog> TransactionLogs { get; set; }
         public DbSet<ReaderType> ReaderTypes { get; set; }
+        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<CarClass> CarClasses { get; set; }
+        public DbSet<Governorate> Governorates { get; set; }
     }
 }

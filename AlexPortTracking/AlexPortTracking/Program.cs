@@ -1,6 +1,9 @@
 using AlexPortTracking.Data;
 using AlexPortTracking.Middlewares;
 using AlexPortTracking.Repos.Car;
+using AlexPortTracking.Repos.CarClass;
+using AlexPortTracking.Repos.CarType;
+using AlexPortTracking.Repos.Governorate;
 using AlexPortTracking.Repos.Reader;
 using AlexPortTracking.Repos.ReaderType;
 using AlexPortTracking.Repos.Transaction;
@@ -20,6 +23,9 @@ builder.Services.AddTransient<IReaderTypeRepo, ReaderTypeRepo>();
 builder.Services.AddTransient<ICarRepo, CarRepo>();
 builder.Services.AddTransient<IReaderRepo, ReaderRepo>();
 builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
+builder.Services.AddTransient<IGovernorateRepo, GovernorateRepo>();
+builder.Services.AddTransient<ICarClassRepo, CarClassRepo>();
+builder.Services.AddTransient<ICarTypeRepo, CarTypeRepo>();
 builder.Services.AddHostedService<StartReader>();
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
