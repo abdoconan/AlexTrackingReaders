@@ -33,7 +33,7 @@ namespace AlexPortTracking.DTOs
         int? CarClassId,
         int? CarTypeId,
         int? GovernorateId,
-        CarClassDTOs CarClass, 
+        CarClassDTO CarClass, 
         CarTypeDTO CarType,
         GovernorateDTO Governorate
         ) 

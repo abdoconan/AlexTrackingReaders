@@ -12,10 +12,11 @@ namespace AlexPortTracking.Models
         public ICollection<Car> Cars { get; set; }
     }
 
-    public class CarCalasConfiguration : IEntityTypeConfiguration<CarClass>
+    public class CarClassConfiguration : IEntityTypeConfiguration<CarClass>
     {
         public void Configure(EntityTypeBuilder<CarClass> builder)
         {
+            builder.ToTable("CarClass");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(256);
             builder.HasIndex(x => x.Description).IsUnique();

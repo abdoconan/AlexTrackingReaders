@@ -35,10 +35,9 @@ namespace AlexPortTracking.Repos.CarType
             return true;
         }
 
-        public async Task<IList<CarTypeDTO>> Get()
-        {
-            return (await context.CarTypes.ToListAsync()).Adapt<List<CarTypeDTO>>();
-        }
+        public async Task<IList<CarTypeDTO>> Get() =>
+             (await context.CarTypes.ToListAsync()).Adapt<List<CarTypeDTO>>();
+        
 
         public async Task<CarTypeDTO> GetById(int Id)
         {

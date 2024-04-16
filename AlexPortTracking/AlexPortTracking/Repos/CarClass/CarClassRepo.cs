@@ -14,13 +14,13 @@ namespace AlexPortTracking.Repos.CarClass
         {
             this.context = context;
         }
-        public async Task<CarClassDTOs> Create(CarClassDTOs newCarClass)
+        public async Task<CarClassDTO> Create(CarClassDTO newCarClass)
         {
             var newCarClassToCreate = newCarClass.Adapt<AlexPortTracking.Models.CarClass>();
             await context.AddAsync(newCarClassToCreate);
             await context.SaveChangesAsync();
 
-            return newCarClassToCreate.Adapt<CarClassDTOs>();
+            return newCarClassToCreate.Adapt<CarClassDTO>();
         }
 
         public async Task<bool> Delete(int Id)
@@ -35,17 +35,17 @@ namespace AlexPortTracking.Repos.CarClass
             return true;
         }
 
-        public async Task<IList<CarClassDTOs>> Get()
+        public async Task<IList<CarClassDTO>> Get()
         {
-            return (await context.CarClasses.ToListAsync()).Adapt<List<CarClassDTOs>>();
+            return (await context.CarClasses.ToListAsync()).Adapt<List<CarClassDTO>>();
         }
 
-        public async Task<CarClassDTOs> GetById(int Id)
+        public async Task<CarClassDTO> GetById(int Id)
         {
-            return (await context.CarClasses.FirstOrDefaultAsync(ct => ct.Id == Id)).Adapt<CarClassDTOs>();
+            return (await context.CarClasses.FirstOrDefaultAsync(ct => ct.Id == Id)).Adapt<CarClassDTO>();
         }
 
-        public async Task<CarClassDTOs> Update(int Id, CarClassDTOs updateCarClass)
+        public async Task<CarClassDTO> Update(int Id, CarClassDTO updateCarClass)
         {
             var carClassToUpdate = await context.CarClasses.FirstOrDefaultAsync(ct => ct.Id == Id);
             if (carClassToUpdate == null)

@@ -4,10 +4,10 @@ namespace AlexPortTracking.Repos.CarClass
 {
     public interface ICarClassRepo
     {
-        Task<IList<CarClassDTOs>> Get();
-        Task<CarClassDTOs> GetById(int Id);
-        Task<CarClassDTOs> Create(CarClassDTOs newCarClass);
-        Task<CarClassDTOs> Update(int Id, CarClassDTOs updateCarClass);
+        Task<IList<CarClassDTO>> Get();
+        Task<CarClassDTO> GetById(int Id);
+        Task<CarClassDTO> Create(CarClassDTO newCarClass);
+        Task<CarClassDTO> Update(int Id, CarClassDTO updateCarClass);
         Task<bool> Delete(int Id);
     }
 }
