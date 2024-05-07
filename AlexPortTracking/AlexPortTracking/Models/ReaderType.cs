@@ -15,15 +15,16 @@ namespace AlexPortTracking.Models
     {
         public void Configure(EntityTypeBuilder<ReaderType> builder)
         {
+            builder.ToTable("ReaderTypes");
             builder.HasKey(rt => rt.Id);
             builder.Property(rt => rt.Name).IsRequired().HasMaxLength(128);
             builder.Property(rt => rt.Description).IsRequired().HasMaxLength(512);
 
 
             builder.HasData(
-                new ReaderType { Id = 1, Name = "in", Description = "This is used for in lanes"},
-                new ReaderType { Id = 2, Name = "out", Description = "This is used for out lanes"},
-                new ReaderType { Id = 3, Name = "scale", Description = "This is used for weight lanes"}
+                new ReaderType { Id = 1, Name = "دخول", Description = "قارئ على بوابة دخول"},
+                new ReaderType { Id = 2, Name = "خروج", Description = "قارئ على بوابة خروج"},
+                new ReaderType { Id = 3, Name = "ميزان", Description = "قارئ على طريق ميزان"}
                 );
 
         }

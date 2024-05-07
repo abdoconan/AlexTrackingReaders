@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlexPortTracking.Models
 {
@@ -23,6 +24,7 @@ namespace AlexPortTracking.Models
     {
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
+            builder.ToTable("Transactions");
             builder.HasKey(t => t.Id);
             builder.HasOne(t => t.Car)
                 .WithMany(c => c.Transactions)

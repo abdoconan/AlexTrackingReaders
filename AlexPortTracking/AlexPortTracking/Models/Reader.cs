@@ -22,6 +22,7 @@ namespace AlexPortTracking.Models
     {
         public void Configure(EntityTypeBuilder<Reader> builder)
         {
+            builder.ToTable("Readers");
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Name).IsRequired().HasMaxLength(128);
             builder.Property(r => r.Signature).IsRequired().HasMaxLength(128);

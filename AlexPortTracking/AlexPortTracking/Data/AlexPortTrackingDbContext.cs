@@ -1,4 +1,5 @@
 ﻿using AlexPortTracking.Models;
+using AlexPortTracking.Models.Views;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
@@ -26,5 +27,6 @@ namespace AlexPortTracking.Data
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<CarClass> CarClasses { get; set; }
         public DbSet<Governorate> Governorates { get; set; }
+        public DbSet<CarCountPerDay> CarCountPerDay { get; set; }
     }
 }

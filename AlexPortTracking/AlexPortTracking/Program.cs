@@ -6,6 +6,7 @@ using AlexPortTracking.Repos.CarType;
 using AlexPortTracking.Repos.Governorate;
 using AlexPortTracking.Repos.Reader;
 using AlexPortTracking.Repos.ReaderType;
+using AlexPortTracking.Repos.Reports;
 using AlexPortTracking.Repos.Transaction;
 using AlexPortTracking.Services;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
 builder.Services.AddTransient<IGovernorateRepo, GovernorateRepo>();
 builder.Services.AddTransient<ICarClassRepo, CarClassRepo>();
 builder.Services.AddTransient<ICarTypeRepo, CarTypeRepo>();
+builder.Services.AddTransient<IReportsRepo, ReportsRepo>();
 builder.Services.AddHostedService<StartReader>();
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
@@ -45,6 +47,7 @@ var app = builder.Build();
 // }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

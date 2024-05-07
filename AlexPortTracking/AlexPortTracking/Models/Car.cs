@@ -34,6 +34,7 @@ namespace AlexPortTracking.Models
     {
         public void Configure(EntityTypeBuilder<Car> builder)
         {
+            builder.ToTable("Cars");
             builder.HasKey(c => c.Id);
             builder.Property(c => c.FrontTag).IsRequired().HasMaxLength(128);
             builder.HasIndex(c => c.FrontTag).IsUnique();
