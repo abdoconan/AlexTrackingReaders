@@ -4,6 +4,6 @@ namespace AlexPortTracking.Repos.Reports
 {
     public interface IReportsRepo
     {
-        Task<List<CarDailyTransactionDTO>> GetDailyTransactions(DateTime date);
+        Task<IList<object>> GetDailyTransactions(DateTime date);
     }
 }

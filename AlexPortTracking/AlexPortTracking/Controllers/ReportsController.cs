@@ -1,6 +1,7 @@
 ﻿using AlexPortTracking.Repos.Reports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlexPortTracking.Controllers
 {
@@ -16,8 +17,8 @@ namespace AlexPortTracking.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Get([FromQuery] DateTime date) =>
-            Ok(reportsRepo.GetDailyTransactions(date));
+        [HttpGet("DailyTransactions")]
+        public async Task<IActionResult> Get([FromQuery] [Required] DateTime date) =>
+            Ok(await reportsRepo.GetDailyTransactions(date));
     }
 }
