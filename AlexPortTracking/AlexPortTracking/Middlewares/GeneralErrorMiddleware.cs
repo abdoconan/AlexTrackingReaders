@@ -1,5 +1,8 @@
-﻿using AlexPortTracking.Data;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace AlexPortTracking.Middlewares
 {
@@ -12,7 +15,7 @@ namespace AlexPortTracking.Middlewares
             this.next = next;
         }
 
-        public async Task Invoke (HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
@@ -20,8 +23,19 @@ namespace AlexPortTracking.Middlewares
             }
             catch (Exception e)
             {
+                var errorResponse = new
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                    Message = "An error occurred.",
+                    ExceptionMessage = e.Message
+                };
+
+                var jsonResponse = JsonSerializer.Serialize(errorResponse);
+
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                await context.Response.WriteAsJsonAsync(e);
+                context.Response.ContentType = "application/json";
+
+                await context.Response.WriteAsync(jsonResponse);
             }
         }
     }

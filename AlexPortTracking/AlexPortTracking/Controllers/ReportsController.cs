@@ -1,6 +1,7 @@
 ﻿using AlexPortTracking.Repos.Reports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlexPortTracking.Controllers
 {
@@ -16,8 +17,16 @@ namespace AlexPortTracking.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Get([FromQuery] DateTime date) =>
-            Ok(reportsRepo.GetDailyTransactions(date));
+        [HttpGet("DailyTransactions")]
+        public async Task<IActionResult> GetDailyTransactions([FromQuery] [Required] DateTime date) =>
+            Ok(await reportsRepo.GetDailyTransactions(date));
+
+        [HttpGet("FilteredTransactions")]
+        public async Task<IActionResult> GetFilteredTransactions([FromQuery] [Required] DateTime? day, int? readerId, int? readerTypeId, string? ownerName, string? plateNumber, string? tag, int? carClassId, int? carTypeId) =>
+            Ok(await reportsRepo.GetFilteredTransactions(day, readerId, readerTypeId, ownerName, plateNumber, tag, carClassId, carTypeId));
+
+        [HttpGet("DailyTransactionsPerReaderType")]
+        public async Task<IActionResult> GetDailyTransactionsPerReaderType([FromQuery][Required] DateTime date) =>
+            Ok(await reportsRepo.GetDailyTransactionsPerReaderType(date));
     }
 }
