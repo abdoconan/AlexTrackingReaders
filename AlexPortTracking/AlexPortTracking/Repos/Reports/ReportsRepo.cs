@@ -83,5 +83,28 @@ namespace AlexPortTracking.Repos.Reports
             return query.Cast<object>().ToList();
         }
 
+        public async Task<IList<object>> GetDailyTransactionsPerReaderType(DateTime date)
+        {
+            var query = await (from t in _context.Transactions
+                               where t.LogTime.Date == date.Date
+                               join r in _context.Readers on t.ReaderId equals r.Id
+                               join rt in _context.ReaderTypes on r.ReaderTypeId equals rt.Id
+                               select new
+                               {
+                                   TransactionId = t.Id,
+                                   ReaderTypeId = rt.Id,
+                                   ReaderTypeName = rt.Name
+                               })
+                               .GroupBy(x => new {  x.ReaderTypeName })
+                               .Select(g => new
+                               {
+                                   ReaderTypeId = g.First().ReaderTypeId,
+                                   ReaderType = g.Key.ReaderTypeName,
+                                   TransactionCount = g.Count()
+                               })
+                               .ToListAsync();
+
+            return query.Cast<object>().ToList();
+        }
     }
 }

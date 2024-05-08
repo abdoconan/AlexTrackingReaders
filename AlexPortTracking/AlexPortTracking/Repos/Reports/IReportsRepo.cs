@@ -6,5 +6,6 @@ namespace AlexPortTracking.Repos.Reports
     {
         Task<IList<object>> GetDailyTransactions(DateTime date);
         Task<IList<object>> GetFilteredTransactions(DateTime? day, int? readerId, int? readerTypeId, string? ownerName, string? plateNumber, string? tag, int? carClassId, int? carTypeId);
+        Task<IList<object>> GetDailyTransactionsPerReaderType(DateTime date);
     }
 }
