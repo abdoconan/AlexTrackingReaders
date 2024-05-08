@@ -18,7 +18,11 @@ namespace AlexPortTracking.Controllers
 
 
         [HttpGet("DailyTransactions")]
-        public async Task<IActionResult> Get([FromQuery] [Required] DateTime date) =>
+        public async Task<IActionResult> GetDailyTransactions([FromQuery] [Required] DateTime date) =>
             Ok(await reportsRepo.GetDailyTransactions(date));
+
+        [HttpGet("FilteredTransactions")]
+        public async Task<IActionResult> GetFilteredTransactions([FromQuery] [Required] DateTime? day, int? readerId, int? readerTypeId, string? ownerName, string? plateNumber, string? tag, int? carClassId, int? carTypeId) =>
+            Ok(await reportsRepo.GetFilteredTransactions(day, readerId, readerTypeId, ownerName, plateNumber, tag, carClassId, carTypeId));
     }
 }
