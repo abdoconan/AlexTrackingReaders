@@ -40,8 +40,8 @@ namespace AlexPortTracking.Services
                     ReaderId = reader.Id,
                     CarId = car.Id,
                     Count = 0,
-                    LogTime = DateTime.UtcNow,
-                    LastLogTime = DateTime.UtcNow,
+                    LogTime = DateTime.Now,
+                    LastLogTime = DateTime.Now,
                 });
                 return true;
             }
@@ -68,7 +68,7 @@ namespace AlexPortTracking.Services
                     ReaderId = reader.Id,
                     CarId = car?.Id,
                     Tag = tag,
-                    LogTime = DateTime.UtcNow,
+                    LogTime = DateTime.Now,
                 });
 
                 if(car != null) 
